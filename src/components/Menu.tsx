@@ -14,7 +14,7 @@ export default function Menu() {
                 titulo="SSG com Dados"
                 url="/renderizacao/ssg2"
                 icone={BD}
-                className="bg-blue-500"
+                className="bg-pink-500"
             />
             <MenuItem
                 titulo="Server-Side Rendering"
