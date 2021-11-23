@@ -247,3 +247,44 @@ export default function ExibirCodigo(props: ExibirCodigoProps) {
         </pre>
     )
 }`
+
+export const urlImport = `
+import Janela from "../../components/Janela"
+import Pagina from "../../components/Pagina"
+import confetti from 'https://cdn.skypack.dev/canvas-confetti'
+
+export default function UrlImport() {
+
+    return (
+        <Pagina>
+            <Janela titulo="Url Import">
+                <div className="flex justify-center py-5">
+                    <button
+                        onClick={() => confetti()}
+                        className={\`
+                            bg-gradient-to-r from-pink-600 to-yellow-600
+                            p-3 rounded-md
+                        \`}
+                    >
+                        É Ritmo de Festa!
+                    </button>
+                </div>
+            </Janela>
+        </Pagina>
+    )
+}`
+
+export const midAB = `
+import { NextFetchEvent, NextRequest, NextResponse } from 'next/server'
+
+const NOME_COOKIE = 'modelo-pagina-checkout'
+
+export function middleware(req: NextRequest, ev: NextFetchEvent) {
+    const opcao = req.cookies[NOME_COOKIE] || (Math.random() > 0.5 ? 'a' : 'b')
+    const res = NextResponse.rewrite(\`/mid/ab/\${opcao}\`)
+
+    if (!req.cookies[NOME_COOKIE]) {
+        res.cookie(NOME_COOKIE, opcao)
+    }
+    return res
+}`

@@ -1,4 +1,4 @@
-import { Atualizar, BD, Documento, Engrenagem } from "./icones";
+import { Atualizar, BD, Documento, Engrenagem, Hash, Link, Server } from "./icones";
 import MenuItem from "./MenuItem";
 
 export default function Menu() {
@@ -27,6 +27,30 @@ export default function Menu() {
                 url="/renderizacao/ssgCsr"
                 icone={Atualizar}
                 cor="green"
+            />
+            <MenuItem
+                titulo="Middleware Simples"
+                url="/mid/simples"
+                icone={Hash}
+                cor="yellow"
+            />
+            <MenuItem
+                titulo="Middleware Teste A/B"
+                url="/mid/ab"
+                icone={Hash}
+                cor="gray"
+            />
+            <MenuItem
+                titulo="Url Import"
+                url="/url/import"
+                icone={Link}
+                cor="pink"
+            />
+            <MenuItem
+                titulo="Server Component"
+                url="/componente/noticias"
+                icone={Server}
+                cor="indigo"
             />
         </div>
     )
