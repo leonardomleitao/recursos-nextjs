@@ -3,30 +3,30 @@ import MenuItem from "./MenuItem";
 
 export default function Menu() {
     return (
-        <div className="grid grid-cols-2 gap-5 md:grid-cols-4 md:gap-10">
+        <div className="flex flex-col">
             <MenuItem
                 titulo="SSG sem Dados"
                 url="/renderizacao/ssg1"
                 icone={Documento}
-                cor="red"
+                className="bg-purple-500"
             />
             <MenuItem
                 titulo="SSG com Dados"
                 url="/renderizacao/ssg2"
                 icone={BD}
-                cor="purple"
+                className="bg-blue-500"
             />
             <MenuItem
                 titulo="Server-Side Rendering"
                 url="/renderizacao/ssr"
                 icone={Engrenagem}
-                cor="blue"
+                className="bg-yellow-600"
             />
             <MenuItem
-                titulo="Integrando SSG + CSR"
+                titulo="Integrando SSG & CSR"
                 url="/renderizacao/ssgCsr"
                 icone={Atualizar}
-                cor="green"
+                className="bg-green-600"
             />
         </div>
     )

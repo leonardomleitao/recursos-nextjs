@@ -5,17 +5,14 @@ import 'prismjs/components/prism-jsx'
 import 'prismjs/components/prism-tsx'
 
 import linguagens from '../data/linguagens'
-import exemplos from '../data/exemplos'
-
 interface ExibirCodigoProps {
-    exemplo: string
+    exemplo: any
 }
 
 export default function ExibirCodigo(props: ExibirCodigoProps) {
-    const exemplo = exemplos[props.exemplo]
-    const linguagem = linguagens[exemplo.linguagem] ?? linguagens.javascript
+    const linguagem = linguagens[props.exemplo.linguagem] ?? linguagens.javascript
     const html = Prism.highlight(
-        exemplo.codigo?.trim(),
+        props.exemplo.codigo?.trim(),
         linguagem.constante,
         linguagem.id
     )

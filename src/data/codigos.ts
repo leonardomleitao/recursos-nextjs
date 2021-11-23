@@ -1,11 +1,14 @@
 export const ssg1 = `
 import Janela from '../../components/Janela'
 import Pagina from '../../components/Pagina'
+import Titulo from '../../components/Titulo'
 
 export default function SSG1() {
     return (
         <Pagina>
-            <Janela titulo="Static Site Generation">
+            <Titulo inicial="SSG" final="sem Dados"
+                mesmaLinha menor className="mb-8" />
+            <Janela urlDoCodigo="/codigo/ssg1" className="w-3/4 lg:w-1/2">
                 <div>Conteúdo Estático Simples</div>
             </Janela>
         </Pagina>
@@ -15,6 +18,7 @@ export default function SSG1() {
 export const ssg2 = `
 import Janela from '../../components/Janela'
 import Pagina from '../../components/Pagina'
+import Titulo from '../../components/Titulo'
 import { formatarDataHora } from '../../utils/data'
 import Http from '../../utils/http'
 
@@ -26,23 +30,28 @@ export async function getStaticProps() {
             geradoEm: formatarDataHora(new Date),
             nomes
         },
-        revalidate: 60, // em segundos
+        revalidate: 60,
     }
 }
 
 export default function SSG2(props) {
 
     function renderizarNomes() {
-        return props.nomes?.map((el, i) => {
-            return <li key={i}>{el}</li>
+        return props.nomes?.map((nome: string, i: number) => {
+            return <li key={i}>{nome}</li>
         })
     }
 
     return (
         <Pagina>
-            <Janela titulo="Static Site Generation com Dados">
-                <div>Gerado em: <span className="font-bold">{props.geradoEm}</span></div>
-                <ul className="list-disc ml-5 mt-5">
+            <Titulo inicial="SSG" final="com Dados"
+                mesmaLinha menor className="mb-10" />
+            <Janela urlDoCodigo="/codigo/ssg2" className="w-3/4 lg:w-1/2">
+                <div>
+                    Gerado em:
+                    <span className="font-bold"> {props.geradoEm}</span>
+                </div>
+                <ul className="list-disc ml-10 mt-5">
                     {renderizarNomes()}
                 </ul>
             </Janela>
@@ -53,6 +62,7 @@ export default function SSG2(props) {
 export const ssr = `
 import Janela from '../../components/Janela'
 import Pagina from '../../components/Pagina'
+import Titulo from '../../components/Titulo'
 import { Pedido, PedidoItem } from '../../core/Pedido'
 import { formatarDataHora } from '../../utils/data'
 import Http from '../../utils/http'
@@ -75,7 +85,7 @@ export default function SSR(props) {
         const pedidos: Pedido[] = props.pedidos
         return pedidos?.map((pedido, i) => {
             return (
-                <tr key={pedido.id} className={\`\${i === 0 ? 'bg-gray-800' : 'bg-gray-700'}\`}>
+                <tr key={pedido.id} className={\`\${i === 0 ? 'bg-gray-900' : 'bg-black'}\`}>
                     <td className="p-3">
                         {pedido.clienteNome}
                     </td>
@@ -92,12 +102,14 @@ export default function SSR(props) {
 
     return (
         <Pagina>
-            <Janela titulo="Server-Side Rendering">
+            <Titulo inicial="Server-Side" final="Rendering"
+                mesmaLinha menor className="mb-8" />
+            <Janela urlDoCodigo="/codigo/ssr">
                 <div>Gerado em: <span className="font-bold">{props.geradoEm}</span></div>
                 <div className="w-full flex justify-center">
                     <table className="w-full rounded-lg overflow-hidden mt-5">
                         <thead>
-                            <tr className="bg-gray-500 rounded-tl-lg rounded-tr-lg">
+                            <tr className="bg-gray-700 rounded-tl-lg rounded-tr-lg">
                                 <th className="py-2">Cliente</th>
                                 <th className="py-2">Data</th>
                                 <th className="py-2">Itens</th>
@@ -117,6 +129,7 @@ export const ssgcsr = `
 import { useEffect, useState } from 'react'
 import Janela from '../../components/Janela'
 import Pagina from '../../components/Pagina'
+import Titulo from '../../components/Titulo'
 import { Pedido, PedidoItem } from '../../core/Pedido'
 import { formatarDataHora } from '../../utils/data'
 import Http from '../../utils/http'
@@ -141,7 +154,7 @@ export default function SSGCSR(props) {
     function renderizarPedidos() {
         return pedidos?.map((pedido, i) => {
             return (
-                <tr key={pedido.id} className={\`\${i === 0 ? 'bg-gray-800' : 'bg-gray-700'}\`}>
+                <tr key={pedido.id} className={\`\${i === 0 ? 'bg-gray-900' : 'bg-black'}\`}>
                     <td className="p-3">
                         {pedido.clienteNome}
                     </td>
@@ -158,12 +171,14 @@ export default function SSGCSR(props) {
 
     return (
         <Pagina>
-            <Janela titulo="Client-Side Rendering">
+            <Titulo inicial="Integrando" final="SSG & CSR"
+                mesmaLinha menor className="mb-8" />
+            <Janela urlDoCodigo="/codigo/ssgcsr">
                 <div>Gerado em: <span className="font-bold">{props.geradoEm}</span></div>
                 <div className="w-full flex justify-center">
                     <table className="w-full rounded-lg overflow-hidden mt-5">
                         <thead>
-                            <tr className="bg-gray-500 rounded-tl-lg rounded-tr-lg">
+                            <tr className="bg-gray-700 rounded-tl-lg rounded-tr-lg">
                                 <th className="py-2">Cliente</th>
                                 <th className="py-2">Data</th>
                                 <th className="py-2">Itens</th>
@@ -186,28 +201,29 @@ import Pagina from '../../components/Pagina'
 import exemplos from '../../data/exemplos'
 
 export function getStaticPaths() {
-    const paths = Object.keys(exemplos).map(exemplo => {
-        return { params: { exemplo } }
+    const paths = Object.keys(exemplos).map(nomeExemplo => {
+        return { params: { nomeExemplo } }
     })
     return { paths, fallback: false }
 }
 
 export function getStaticProps({ params }) {
-    const { exemplo } = params
+    const { nomeExemplo } = params
     return {
-        props: { exemplo }
+        props: { nomeExemplo }
     }
 }
 
 export default function CodigoDoExemplo(props) {
-    return props.exemplo ? (
+    const exemplo = exemplos[props.nomeExemplo]
+    return exemplo ? (
         <Pagina>
             <Janela
-                titulo={\`Código do exemplo: \${props.exemplo}\`}
+                titulo={\`Código do exemplo: \${props.nomeExemplo}\`}
                 urlDoCodigo="/codigo/codigo"
-                largura="w-3/4"
+                urlVoltar={exemplo.voltarPara ? exemplo.voltarPara : '/'}
             >
-                <ExibirCodigo exemplo={props.exemplo} />
+                <ExibirCodigo exemplo={exemplo} />
             </Janela>
         </Pagina>
     ) : null
@@ -224,17 +240,14 @@ import 'prismjs/components/prism-jsx'
 import 'prismjs/components/prism-tsx'
 
 import linguagens from '../data/linguagens'
-import exemplos from '../data/exemplos'
-
 interface ExibirCodigoProps {
-    exemplo: string
+    exemplo: any
 }
 
 export default function ExibirCodigo(props: ExibirCodigoProps) {
-    const exemplo = exemplos[props.exemplo]
-    const linguagem = linguagens[exemplo.linguagem] ?? linguagens.javascript
+    const linguagem = linguagens[props.exemplo.linguagem] ?? linguagens.javascript
     const html = Prism.highlight(
-        exemplo.codigo?.trim(),
+        props.exemplo.codigo?.trim(),
         linguagem.constante,
         linguagem.id
     )
