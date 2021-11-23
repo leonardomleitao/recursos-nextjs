@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Externo, X } from './icones'
 
@@ -12,7 +13,8 @@ interface JanelaProps {
 export default function Janela(props: JanelaProps) {
 
     return (
-        <div className={`flex flex-col rounded-lg bg-gray-800 ${props.className}`}>
+        <motion.div className={`flex flex-col rounded-lg bg-gray-800 ${props.className}`}
+            animate={{ opacity: [0.2, 1], y: [-100, 0] }} transition={{ duration: 0.5 }}>
             <div className="flex items-center p-4">
                 <Link href={props.urlVoltar ? props.urlVoltar : '/'} passHref>
                     <div className="flex cursor-pointer">
@@ -41,6 +43,6 @@ export default function Janela(props: JanelaProps) {
             <div className="p-5 text-gray-300 text-2xl">
                 {props.children}
             </div>
-        </div>
+        </motion.div>
     )
 }

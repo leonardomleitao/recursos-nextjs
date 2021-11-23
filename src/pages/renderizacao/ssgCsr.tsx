@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
-import Janela from '../../components/Janela'
-import Pagina from '../../components/Pagina'
-import Titulo from '../../components/Titulo'
-import { Pedido, PedidoItem } from '../../core/Pedido'
-import { formatarDataHora } from '../../utils/data'
+import PaginaExemplo from '../../components/PaginaExemplo'
 import Http from '../../utils/http'
+import { formatarDataHora } from '../../utils/data'
+import { Pedido, PedidoItem } from '../../core/Pedido'
 
 export function getStaticProps() {
     return {
@@ -42,26 +40,22 @@ export default function SSGCSR(props) {
     }
 
     return (
-        <Pagina>
-            <Titulo inicial="Integrando" final="SSG & CSR"
-                mesmaLinha menor className="mb-8" />
-            <Janela urlDoCodigo="/codigo/ssgcsr">
-                <div>Gerado em: <span className="font-bold">{props.geradoEm}</span></div>
-                <div className="w-full flex justify-center">
-                    <table className="w-full rounded-lg overflow-hidden mt-5">
-                        <thead>
-                            <tr className="bg-gray-700 rounded-tl-lg rounded-tr-lg">
-                                <th className="py-2">Cliente</th>
-                                <th className="py-2">Data</th>
-                                <th className="py-2">Itens</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {renderizarPedidos()}
-                        </tbody>
-                    </table>
-                </div>
-            </Janela>
-        </Pagina>
+        <PaginaExemplo titulo={['Integrando', 'SSG & CSR']} urlDoCodigo="/codigo/ssgcsr">
+            <div>Gerado em: <span className="font-bold">{props.geradoEm}</span></div>
+            <div className="w-full flex justify-center">
+                <table className="w-full rounded-lg overflow-hidden mt-5">
+                    <thead>
+                        <tr className="bg-gray-700 rounded-tl-lg rounded-tr-lg">
+                            <th className="py-2">Cliente</th>
+                            <th className="py-2">Data</th>
+                            <th className="py-2">Itens</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {renderizarPedidos()}
+                    </tbody>
+                </table>
+            </div>
+        </PaginaExemplo>
     )
 }
