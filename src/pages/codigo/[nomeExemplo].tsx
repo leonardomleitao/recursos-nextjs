@@ -4,28 +4,29 @@ import Pagina from '../../components/Pagina'
 import exemplos from '../../data/exemplos'
 
 export function getStaticPaths() {
-    const paths = Object.keys(exemplos).map(exemplo => {
-        return { params: { exemplo } }
+    const paths = Object.keys(exemplos).map(nomeExemplo => {
+        return { params: { nomeExemplo } }
     })
     return { paths, fallback: false }
 }
 
 export function getStaticProps({ params }) {
-    const { exemplo } = params
+    const { nomeExemplo } = params
     return {
-        props: { exemplo }
+        props: { nomeExemplo }
     }
 }
 
 export default function CodigoDoExemplo(props) {
-    return props.exemplo ? (
+    const exemplo = exemplos[props.nomeExemplo]
+    return exemplo ? (
         <Pagina>
             <Janela
-                titulo={`Código do exemplo: ${props.exemplo}`}
+                titulo={`Código do exemplo: ${props.nomeExemplo}`}
                 urlDoCodigo="/codigo/codigo"
-                largura="w-3/4"
+                urlVoltar={exemplo.voltarPara ? exemplo.voltarPara : '/'}
             >
-                <ExibirCodigo exemplo={props.exemplo} />
+                <ExibirCodigo exemplo={exemplo} />
             </Janela>
         </Pagina>
     ) : null

@@ -1,5 +1,6 @@
 import Janela from '../../components/Janela'
 import Pagina from '../../components/Pagina'
+import Titulo from '../../components/Titulo'
 import { formatarDataHora } from '../../utils/data'
 import Http from '../../utils/http'
 
@@ -18,16 +19,21 @@ export async function getStaticProps() {
 export default function SSG2(props) {
 
     function renderizarNomes() {
-        return props.nomes?.map((el, i) => {
-            return <li key={i}>{el}</li>
+        return props.nomes?.map((nome: string, i: number) => {
+            return <li key={i}>{nome}</li>
         })
     }
 
     return (
         <Pagina>
-            <Janela titulo="Static Site Generation com Dados" urlDoCodigo="/codigo/ssg2">
-                <div>Gerado em: <span className="font-bold">{props.geradoEm}</span></div>
-                <ul className="list-disc ml-5 mt-5">
+            <Titulo inicial="SSG" final="com Dados"
+                mesmaLinha menor className="mb-10" />
+            <Janela urlDoCodigo="/codigo/ssg2" className="w-3/4 lg:w-1/2">
+                <div>
+                    Gerado em:
+                    <span className="font-bold"> {props.geradoEm}</span>
+                </div>
+                <ul className="list-disc ml-10 mt-5">
                     {renderizarNomes()}
                 </ul>
             </Janela>
