@@ -11,7 +11,7 @@ export async function getStaticProps() {
             geradoEm: formatarDataHora(new Date),
             nomes
         },
-        revalidate: 5,
+        revalidate: 60,
     }
 }
 
