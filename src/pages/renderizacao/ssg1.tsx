@@ -6,7 +6,7 @@ export default function SSG1() {
     return (
         <Pagina>
             <Titulo inicial="SSG" final="sem Dados"
-                mesmaLinha menor className="mb-8" />
+                mesmaLinha menor className="mb-8" animar />
             <Janela urlDoCodigo="/codigo/ssg1" className="w-3/4 lg:w-1/2">
                 <div>Conteúdo Estático Simples</div>
             </Janela>

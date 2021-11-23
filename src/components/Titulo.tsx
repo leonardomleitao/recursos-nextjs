@@ -1,18 +1,25 @@
+import { motion } from 'framer-motion'
+
 interface TituloProps {
     inicial: string
     final: string
     mesmaLinha?: boolean
     className?: string
     menor?: boolean
+    animar?: boolean
 }
 
 export default function Titulo(props: TituloProps) {
     return (
-        <div className={`
-            ${props.mesmaLinha ? 'flex flex-col sm:flex-row' : ''}
-            text-center sm:text-left
-            ${props.className}
-        `}>
+        <motion.div 
+            className={`
+                ${props.mesmaLinha ? 'flex flex-col sm:flex-row' : ''}
+                text-center sm:text-left
+                ${props.className}
+            `} 
+            animate={props.animar ? { opacity: [0.5, 1], x: [-100, 0] } : {}} 
+            transition={{ duration: 0.5 }}
+        >
             <h1 className={`
                 text-5xl md:text-6xl ${props.menor ? '' : 'lg:text-8xl'} 
                 font-extrabold text-white
@@ -27,6 +34,6 @@ export default function Titulo(props: TituloProps) {
             `}>
                 {props.final}
             </h1>
-        </div>
+        </motion.div>
     )
 }
