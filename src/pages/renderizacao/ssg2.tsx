@@ -4,7 +4,7 @@ import { formatarDataHora } from '../../utils/data'
 import Http from '../../utils/http'
 
 export async function getStaticProps() {
-    const nomes = await Http.get('/api/nomes')
+    const nomes = [] // await Http.get('/api/nomes')
 
     return {
         props: {

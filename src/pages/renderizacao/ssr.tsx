@@ -5,7 +5,7 @@ import { formatarDataHora } from '../../utils/data'
 import Http from '../../utils/http'
 
 export async function getServerSideProps() {
-    const pedidos: Pedido[] = await Http.get('/api/pedidos/abertos')
+    const pedidos: Pedido[] = [] // await Http.get('/api/pedidos/abertos')
 
     return {
         props: {
