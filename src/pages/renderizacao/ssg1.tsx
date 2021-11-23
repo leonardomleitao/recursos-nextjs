@@ -1,15 +1,9 @@
-import Janela from '../../components/Janela'
-import Pagina from '../../components/Pagina'
-import Titulo from '../../components/Titulo'
+import PaginaExemplo from '../../components/PaginaExemplo'
 
 export default function SSG1() {
     return (
-        <Pagina>
-            <Titulo inicial="SSG" final="sem Dados"
-                mesmaLinha menor className="mb-8" animar />
-            <Janela urlDoCodigo="/codigo/ssg1" className="w-3/4 lg:w-1/2">
-                <div>Conteúdo Estático Simples</div>
-            </Janela>
-        </Pagina>
+        <PaginaExemplo titulo={['SSG', 'sem Dados']} urlDoCodigo="/codigo/ssg1">
+            <div>Conteúdo Estático Simples</div>
+        </PaginaExemplo>
     )
 }

@@ -1,26 +1,18 @@
 export const ssg1 = `
-import Janela from '../../components/Janela'
-import Pagina from '../../components/Pagina'
-import Titulo from '../../components/Titulo'
+import PaginaExemplo from '../../components/PaginaExemplo'
 
 export default function SSG1() {
     return (
-        <Pagina>
-            <Titulo inicial="SSG" final="sem Dados"
-                mesmaLinha menor className="mb-8" />
-            <Janela urlDoCodigo="/codigo/ssg1" className="w-3/4 lg:w-1/2">
-                <div>Conteúdo Estático Simples</div>
-            </Janela>
-        </Pagina>
+        <PaginaExemplo titulo={['SSG', 'sem Dados']} urlDoCodigo="/codigo/ssg1">
+            <div>Conteúdo Estático Simples</div>
+        </PaginaExemplo>
     )
 }`
 
 export const ssg2 = `
-import Janela from '../../components/Janela'
-import Pagina from '../../components/Pagina'
-import Titulo from '../../components/Titulo'
-import { formatarDataHora } from '../../utils/data'
+import PaginaExemplo from '../../components/PaginaExemplo'
 import Http from '../../utils/http'
+import { formatarDataHora } from '../../utils/data'
 
 export async function getStaticProps() {
     const nomes = await Http.get('/api/nomes')
@@ -43,29 +35,23 @@ export default function SSG2(props) {
     }
 
     return (
-        <Pagina>
-            <Titulo inicial="SSG" final="com Dados"
-                mesmaLinha menor className="mb-10" />
-            <Janela urlDoCodigo="/codigo/ssg2" className="w-3/4 lg:w-1/2">
-                <div>
-                    Gerado em:
-                    <span className="font-bold"> {props.geradoEm}</span>
-                </div>
-                <ul className="list-disc ml-10 mt-5">
-                    {renderizarNomes()}
-                </ul>
-            </Janela>
-        </Pagina>
+        <PaginaExemplo titulo={['SSG', 'com Dados']} urlDoCodigo="/codigo/ssg2">
+            <div>
+                Gerado em:
+                <span className="font-bold"> {props.geradoEm}</span>
+            </div>
+            <ul className="list-disc ml-10 mt-5">
+                {renderizarNomes()}
+            </ul>
+        </PaginaExemplo>
     )
 }`
 
 export const ssr = `
-import Janela from '../../components/Janela'
-import Pagina from '../../components/Pagina'
-import Titulo from '../../components/Titulo'
-import { Pedido, PedidoItem } from '../../core/Pedido'
-import { formatarDataHora } from '../../utils/data'
+import PaginaExemplo from '../../components/PaginaExemplo'
 import Http from '../../utils/http'
+import { formatarDataHora } from '../../utils/data'
+import { Pedido, PedidoItem } from '../../core/Pedido'
 
 export async function getServerSideProps() {
     const pedidos: Pedido[] = await Http.get('/api/pedidos/abertos')
@@ -101,38 +87,32 @@ export default function SSR(props) {
     }
 
     return (
-        <Pagina>
-            <Titulo inicial="Server-Side" final="Rendering"
-                mesmaLinha menor className="mb-8" />
-            <Janela urlDoCodigo="/codigo/ssr">
-                <div>Gerado em: <span className="font-bold">{props.geradoEm}</span></div>
-                <div className="w-full flex justify-center">
-                    <table className="w-full rounded-lg overflow-hidden mt-5">
-                        <thead>
-                            <tr className="bg-gray-700 rounded-tl-lg rounded-tr-lg">
-                                <th className="py-2">Cliente</th>
-                                <th className="py-2">Data</th>
-                                <th className="py-2">Itens</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {renderizarPedidos()}
-                        </tbody>
-                    </table>
-                </div>
-            </Janela>
-        </Pagina>
+        <PaginaExemplo titulo={['Server-Side', 'Rendering']} urlDoCodigo="/codigo/ssr">
+            <div>Gerado em: <span className="font-bold">{props.geradoEm}</span></div>
+            <div className="w-full flex justify-center">
+                <table className="w-full rounded-lg overflow-hidden mt-5">
+                    <thead>
+                        <tr className="bg-gray-700 rounded-tl-lg rounded-tr-lg">
+                            <th className="py-2">Cliente</th>
+                            <th className="py-2">Data</th>
+                            <th className="py-2">Itens</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {renderizarPedidos()}
+                    </tbody>
+                </table>
+            </div>
+        </PaginaExemplo>
     )
 }`
 
 export const ssgcsr = `
 import { useEffect, useState } from 'react'
-import Janela from '../../components/Janela'
-import Pagina from '../../components/Pagina'
-import Titulo from '../../components/Titulo'
-import { Pedido, PedidoItem } from '../../core/Pedido'
-import { formatarDataHora } from '../../utils/data'
+import PaginaExemplo from '../../components/PaginaExemplo'
 import Http from '../../utils/http'
+import { formatarDataHora } from '../../utils/data'
+import { Pedido, PedidoItem } from '../../core/Pedido'
 
 export function getStaticProps() {
     return {
@@ -170,27 +150,23 @@ export default function SSGCSR(props) {
     }
 
     return (
-        <Pagina>
-            <Titulo inicial="Integrando" final="SSG & CSR"
-                mesmaLinha menor className="mb-8" />
-            <Janela urlDoCodigo="/codigo/ssgcsr">
-                <div>Gerado em: <span className="font-bold">{props.geradoEm}</span></div>
-                <div className="w-full flex justify-center">
-                    <table className="w-full rounded-lg overflow-hidden mt-5">
-                        <thead>
-                            <tr className="bg-gray-700 rounded-tl-lg rounded-tr-lg">
-                                <th className="py-2">Cliente</th>
-                                <th className="py-2">Data</th>
-                                <th className="py-2">Itens</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {renderizarPedidos()}
-                        </tbody>
-                    </table>
-                </div>
-            </Janela>
-        </Pagina>
+        <PaginaExemplo titulo={['Integrando', 'SSG & CSR']} urlDoCodigo="/codigo/ssgcsr">
+            <div>Gerado em: <span className="font-bold">{props.geradoEm}</span></div>
+            <div className="w-full flex justify-center">
+                <table className="w-full rounded-lg overflow-hidden mt-5">
+                    <thead>
+                        <tr className="bg-gray-700 rounded-tl-lg rounded-tr-lg">
+                            <th className="py-2">Cliente</th>
+                            <th className="py-2">Data</th>
+                            <th className="py-2">Itens</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {renderizarPedidos()}
+                    </tbody>
+                </table>
+            </div>
+        </PaginaExemplo>
     )
 }`
 
