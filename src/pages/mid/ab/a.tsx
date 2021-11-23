@@ -1,15 +1,10 @@
-import Janela from "../../../components/Janela";
-import Pagina from "../../../components/Pagina";
-import Titulo from "../../../components/Titulo";
+import PaginaExemplo from "../../../components/PaginaExemplo"
 
 export default function A() {
     return (
-        <Pagina>
-            <Titulo inicial="Middleware" final="Página A"
-                mesmaLinha menor className="mb-8" />
-            <Janela urlDoCodigo="/codigo/midAB">
-                Essa é a opção A
-            </Janela>
-        </Pagina>
+        <PaginaExemplo titulo={['Middleware', 'Página A']}
+            urlDoCodigo="/codigo/midAB">
+            <div>Essa é a opção A</div>
+        </PaginaExemplo>
     )
 }
